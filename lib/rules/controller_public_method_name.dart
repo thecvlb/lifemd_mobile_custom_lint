@@ -1,4 +1,5 @@
 import 'package:analyzer/dart/ast/ast.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:analyzer/error/error.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:analyzer/source/source_range.dart';
@@ -24,10 +25,8 @@ class ControllerPublicMethodName extends DartLintRule {
     CustomLintContext context,
   ) {
     context.registry.addClassDeclaration((node) {
-      final isController = node.declaredElement?.allSupertypes
-              .map((e) => e.element.name)
-              .contains('GetxController') ==
-          true;
+      final isController =
+          _isControllerOrSubclass(node.declaredElement?.supertype);
 
       if (isController) {
         for (final member in node.members) {
@@ -50,6 +49,15 @@ class ControllerPublicMethodName extends DartLintRule {
 
   @override
   List<Fix> getFixes() => [_ControllerPublicMethodNameFix()];
+
+  bool _isControllerOrSubclass(DartType? type) =>
+      _isController(type) || _isSubclassOfController(type);
+
+  bool _isSubclassOfController(DartType? type) =>
+      type is InterfaceType && type.allSupertypes.any(_isController);
+
+  bool _isController(DartType? type) =>
+      type?.getDisplayString(withNullability: false) == 'GetxController';
 }
 
 class _ControllerPublicMethodNameFix extends DartFix {
@@ -64,7 +72,7 @@ class _ControllerPublicMethodNameFix extends DartFix {
     context.registry.addMethodDeclaration((node) {
       if (!analysisError.sourceRange.intersects(node.name.sourceRange)) return;
 
-      final currentName = node.name.toString();
+      final currentName = node.name.lexeme;
 
       final validName =
           '${ControllerPublicMethodName.PREFIX}${currentName[0].toUpperCase()}${currentName.substring(1)}';
