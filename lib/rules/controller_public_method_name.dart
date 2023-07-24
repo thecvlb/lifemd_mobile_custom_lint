@@ -1,9 +1,9 @@
 import 'package:analyzer/dart/ast/ast.dart';
-import 'package:analyzer/dart/element/type.dart';
 import 'package:analyzer/error/error.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:analyzer/source/source_range.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:lifemd_mobile_custom_lint/type_utils.dart';
 
 class ControllerPublicMethodName extends DartLintRule {
   ControllerPublicMethodName() : super(code: _code);
@@ -26,7 +26,7 @@ class ControllerPublicMethodName extends DartLintRule {
   ) {
     context.registry.addClassDeclaration((node) {
       final isController =
-          _isControllerOrSubclass(node.declaredElement?.supertype);
+          isControllerOrSubclass(node.declaredElement?.supertype);
 
       if (isController) {
         for (final member in node.members) {
@@ -49,15 +49,6 @@ class ControllerPublicMethodName extends DartLintRule {
 
   @override
   List<Fix> getFixes() => [_ControllerPublicMethodNameFix()];
-
-  bool _isControllerOrSubclass(DartType? type) =>
-      _isController(type) || _isSubclassOfController(type);
-
-  bool _isSubclassOfController(DartType? type) =>
-      type is InterfaceType && type.allSupertypes.any(_isController);
-
-  bool _isController(DartType? type) =>
-      type?.getDisplayString(withNullability: false) == 'GetxController';
 }
 
 class _ControllerPublicMethodNameFix extends DartFix {

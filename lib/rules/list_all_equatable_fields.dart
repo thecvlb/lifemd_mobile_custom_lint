@@ -6,6 +6,7 @@ import 'package:analyzer/error/error.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:collection/collection.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:lifemd_mobile_custom_lint/type_utils.dart';
 
 class ListAllEquatableFields extends DartLintRule {
   ListAllEquatableFields() : super(code: _code);
@@ -24,12 +25,12 @@ class ListAllEquatableFields extends DartLintRule {
     context.registry.addClassDeclaration((node) {
       final classType = node.extendsClause?.superclass.type;
 
-      final isEquatable = _isEquatableOrSubclass(classType);
+      final isEquatable = isEquatableOrSubclass(classType);
 
       final isMixin = node.withClause?.mixinTypes
-              .any((mixinType) => _isEquatableMixin(mixinType.type)) ??
+              .any((mixinType) => isEquatableMixin(mixinType.type)) ??
           false;
-      final isSubclassOfMixin = _isSubclassOfEquatableMixin(classType);
+      final isSubclassOfMixin = isSubclassOfEquatableMixin(classType);
 
       if (!isEquatable && !isMixin && !isSubclassOfMixin) {
         return;
@@ -78,27 +79,6 @@ class ListAllEquatableFields extends DartLintRule {
         }
       }
     });
-  }
-
-  bool _isEquatableOrSubclass(DartType? type) =>
-      _isEquatable(type) || _isSubclassOfEquatable(type);
-
-  bool _isSubclassOfEquatable(DartType? type) =>
-      type is InterfaceType && type.allSupertypes.any(_isEquatable);
-
-  bool _isEquatable(DartType? type) =>
-      type?.getDisplayString(withNullability: false) == 'Equatable';
-
-  bool _isEquatableMixin(DartType? type) =>
-      // ignore: deprecated_member_use
-      type?.element2 is MixinElement &&
-      type?.getDisplayString(withNullability: false) == 'EquatableMixin';
-
-  bool _isSubclassOfEquatableMixin(DartType? type) {
-    // ignore: deprecated_member_use
-    final element = type?.element2;
-
-    return element is ClassElement && element.mixins.any(_isEquatableMixin);
   }
 
   Set<String> _getParentFields(DartType? classType) {

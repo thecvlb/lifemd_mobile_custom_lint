@@ -1,7 +1,7 @@
 import 'package:analyzer/dart/ast/ast.dart';
-import 'package:analyzer/dart/element/type.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:lifemd_mobile_custom_lint/type_utils.dart';
 
 enum _ClassType {
   controller('Controller'),
@@ -32,10 +32,10 @@ class ControllerPublicMemberDocumentation extends DartLintRule {
       final superType = node.declaredElement?.supertype;
 
       _ClassType? type;
-      if (_isControllerOrSubclass(superType)) {
+      if (isControllerOrSubclass(superType)) {
         type = _ClassType.controller;
-      } else if (_isServiceOrSubclass(superType) ||
-          _isDisposableServiceOrSubclass(superType)) {
+      } else if (isServiceOrSubclass(superType) ||
+          isDisposableServiceOrSubclass(superType)) {
         type = _ClassType.service;
       }
 
@@ -75,31 +75,4 @@ class ControllerPublicMemberDocumentation extends DartLintRule {
       }
     });
   }
-
-  bool _isControllerOrSubclass(DartType? type) =>
-      _isController(type) || _isSubclassOfController(type);
-
-  bool _isSubclassOfController(DartType? type) =>
-      type is InterfaceType && type.allSupertypes.any(_isController);
-
-  bool _isController(DartType? type) =>
-      type?.getDisplayString(withNullability: false) == 'GetxController';
-
-  bool _isServiceOrSubclass(DartType? type) =>
-      _isService(type) || _isSubclassOfService(type);
-
-  bool _isSubclassOfService(DartType? type) =>
-      type is InterfaceType && type.allSupertypes.any(_isService);
-
-  bool _isService(DartType? type) =>
-      type?.getDisplayString(withNullability: false) == 'GetxService';
-
-  bool _isDisposableServiceOrSubclass(DartType? type) =>
-      _isDisposableService(type) || _isSubclassOfDisposableService(type);
-
-  bool _isSubclassOfDisposableService(DartType? type) =>
-      type is InterfaceType && type.allSupertypes.any(_isDisposableService);
-
-  bool _isDisposableService(DartType? type) =>
-      type?.getDisplayString(withNullability: false) == 'DisposableGetxService';
 }
