@@ -16,17 +16,11 @@ class ControllerPublicMutableProperty extends DartLintRule {
     problemMessage: _problemMessage,
   );
 
-  static const _rxChecker = TypeChecker.fromName(
-    'Rx',
-  );
+  static const _rxChecker = TypeChecker.fromName('Rx');
 
-  static const _rxListChecker = TypeChecker.fromName(
-    'RxList',
-  );
+  static const _rxListChecker = TypeChecker.fromName('RxList');
 
-  static const _listChecker = TypeChecker.fromName(
-    'List',
-  );
+  static const _listChecker = TypeChecker.fromName('List');
 
   static const _listCorrectionMessage =
       'UnmodifiableListView or Iterable should be used instead of List';
