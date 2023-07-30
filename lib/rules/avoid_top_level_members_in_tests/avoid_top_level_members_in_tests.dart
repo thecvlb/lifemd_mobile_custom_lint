@@ -51,8 +51,11 @@ class AvoidTopLevelMembersInTests extends DartLintRule {
       }
     });
 
-    context.registry.addVariableDeclaration((node) {
-      if (!Identifier.isPrivateName(node.name.lexeme)) {
+    context.registry.addTopLevelVariableDeclaration((node) {
+      final variables = node.variables.variables;
+
+      if (variables.isNotEmpty &&
+          !Identifier.isPrivateName(variables.first.name.lexeme)) {
         reporter.reportErrorForNode(code, node);
       }
     });
@@ -61,7 +64,9 @@ class AvoidTopLevelMembersInTests extends DartLintRule {
       final name = node.name.lexeme;
       final isEntryPoint = name == 'main';
 
-      if (!isEntryPoint && !Identifier.isPrivateName(name)) {
+      final isTop = node.parent == null || node.parent?.offset == 0;
+
+      if (!isEntryPoint && !Identifier.isPrivateName(name) && isTop) {
         reporter.reportErrorForNode(code, node);
       }
     });

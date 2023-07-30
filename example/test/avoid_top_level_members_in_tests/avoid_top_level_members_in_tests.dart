@@ -1,13 +1,15 @@
 // ignore_for_file: prefer-correct-test-file-name, unused_field, unused_element
 
 // expect_lint: avoid-top-level-members-in-tests
-final public = 1; // LINT
+final public = 1;
 final _private = 2;
 
-void main() {}
+void main() {
+  void function1() {}
+}
 
 // expect_lint: avoid-top-level-members-in-tests
-void function() {} // LINT
+void function() {}
 
 void _function() {}
 
