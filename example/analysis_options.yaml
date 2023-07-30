@@ -1,0 +1,8 @@
+analyzer:
+  plugins:
+    - custom_lint
+
+custom_lint:
+  rules:
+    # A lint rule that is explicitly disabled
+#    - controller_public_member_documentation: false

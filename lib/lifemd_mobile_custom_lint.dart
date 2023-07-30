@@ -6,6 +6,7 @@ import 'rules/avoid_top_level_members_in_tests/avoid_top_level_members_in_tests.
 import 'rules/controller_public_member_documentation/controller_public_member_documentation.dart';
 import 'rules/controller_public_method_name/controller_public_method_name.dart';
 import 'rules/controller_public_mutable_property/controller_public_mutable_property.dart';
+import 'rules/correct_test_description/correct_test_description.dart';
 import 'rules/equtable_public_property_documentation/equtable_public_property_documentation.dart';
 import 'rules/list_all_equatable_fields/list_all_equatable_fields.dart';
 import 'rules/prefer_correct_edge_insets_constructor/prefer_correct_edge_insets_constructor.dart';
@@ -29,5 +30,6 @@ class _MobileCustomLinter extends PluginBase {
         AvoidTopLevelMembersInTests(),
         AvoidExpandedAsSpacer(),
         PreferCorrectEdgeInsetsConstructor(),
+        CorrectTestDescription(),
       ];
 }
