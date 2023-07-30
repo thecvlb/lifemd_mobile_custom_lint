@@ -1,0 +1,11 @@
+name: lifemd_mobile_custom_lint_test_examples
+description: A custom lint test examples lifemd_patient_portal_mobile.
+
+environment:
+  sdk: '>=3.0.6 <4.0.0'
+
+dev_dependencies:
+  custom_lint: ^0.5.0
+  lifemd_mobile_custom_lint:
+    path: ../
+

@@ -4,7 +4,8 @@ import 'package:analyzer/error/listener.dart';
 import 'package:analyzer/source/source_range.dart';
 import 'package:collection/collection.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
-import 'package:meta/meta.dart';
+
+import 'flutter_defines.dart';
 
 class PreferCorrectEdgeInsetsConstructor extends DartLintRule {
   PreferCorrectEdgeInsetsConstructor() : super(code: _code);
@@ -319,21 +320,4 @@ class _PreferCorrectEdgeInsetsConstructorFix extends DartFix {
       }
     });
   }
-}
-
-@immutable
-class EdgeInsetsParam {
-  final String? name;
-  final num? value;
-
-  const EdgeInsetsParam({required this.value, this.name});
-}
-
-@immutable
-class EdgeInsetsData {
-  final String className;
-  final String constructorName;
-  final List<EdgeInsetsParam> params;
-
-  const EdgeInsetsData(this.className, this.constructorName, this.params);
 }

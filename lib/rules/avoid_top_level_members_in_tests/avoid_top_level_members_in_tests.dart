@@ -6,8 +6,6 @@ import 'package:custom_lint_builder/custom_lint_builder.dart';
 class AvoidTopLevelMembersInTests extends DartLintRule {
   AvoidTopLevelMembersInTests() : super(code: _code);
 
-  /// Metadata about the warning that will show-up in the IDE.
-  /// This is used for `// ignore: code` and enabling/disabling the lint
   static const _code = const LintCode(
     name: 'avoid-top-level-members-in-tests',
     problemMessage: 'Avoid declaring top-level members in tests.',
@@ -53,13 +51,17 @@ class AvoidTopLevelMembersInTests extends DartLintRule {
       }
     });
 
+    context.registry.addVariableDeclaration((node) {
+      if (!Identifier.isPrivateName(node.name.lexeme)) {
+        reporter.reportErrorForNode(code, node);
+      }
+    });
+
     context.registry.addFunctionDeclaration((node) {
       final name = node.name.lexeme;
       final isEntryPoint = name == 'main';
 
-      if (node.parent == null &&
-          !isEntryPoint &&
-          !Identifier.isPrivateName(name)) {
+      if (!isEntryPoint && !Identifier.isPrivateName(name)) {
         reporter.reportErrorForNode(code, node);
       }
     });

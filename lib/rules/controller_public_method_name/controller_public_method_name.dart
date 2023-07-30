@@ -10,8 +10,6 @@ class ControllerPublicMethodName extends DartLintRule {
 
   static const PREFIX = 'on';
 
-  /// Metadata about the warning that will show-up in the IDE.
-  /// This is used for `// ignore: code` and enabling/disabling the lint
   static const _code = LintCode(
     name: 'controller_public_method_name',
     problemMessage:

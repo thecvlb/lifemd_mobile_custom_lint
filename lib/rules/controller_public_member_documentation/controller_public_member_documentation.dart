@@ -15,8 +15,6 @@ enum _ClassType {
 class ControllerPublicMemberDocumentation extends DartLintRule {
   ControllerPublicMemberDocumentation() : super(code: _code);
 
-  /// Metadata about the warning that will show-up in the IDE.
-  /// This is used for `// ignore: code` and enabling/disabling the lint
   static const _code = const LintCode(
     name: 'controller_public_member_documentation',
     problemMessage: 'Public member should have documentation',

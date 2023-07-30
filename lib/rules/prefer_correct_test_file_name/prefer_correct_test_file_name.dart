@@ -5,8 +5,6 @@ import 'package:custom_lint_builder/custom_lint_builder.dart';
 class PreferCorrectTestFileName extends DartLintRule {
   PreferCorrectTestFileName() : super(code: _code);
 
-  /// Metadata about the warning that will show-up in the IDE.
-  /// This is used for `// ignore: code` and enabling/disabling the lint
   static const _code = const LintCode(
     name: 'prefer-correct-test-file-name',
     problemMessage: 'Test file must ends with _test',
@@ -26,7 +24,7 @@ class PreferCorrectTestFileName extends DartLintRule {
         final name = node.name.lexeme;
         final isEntryPoint = name == 'main';
         if (isEntryPoint) {
-          reporter.reportErrorForOffset(code, 0, 1);
+          reporter.reportErrorForNode(code, node);
         }
       });
     }
