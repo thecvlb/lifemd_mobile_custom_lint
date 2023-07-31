@@ -6,10 +6,12 @@ import 'package:custom_lint_builder/custom_lint_builder.dart';
 class CorrectTestDescription extends DartLintRule {
   CorrectTestDescription() : super(code: _code);
 
+  static const _errorSeverity = ErrorSeverity.INFO;
+
   static const _code = const LintCode(
     name: 'correct-test-description',
     problemMessage: 'Wrong test description',
-    errorSeverity: ErrorSeverity.INFO,
+    errorSeverity: _errorSeverity,
   );
 
   List<String> get filesToAnalyze => const ['test/**.dart'];
@@ -61,15 +63,6 @@ class CorrectTestDescription extends DartLintRule {
           _reportErrorForNode(
               reporter, node, 'Then section should have `should` word');
         }
-
-        // final code = LintCode(
-        //   name: 'correct-test-description',
-        //   problemMessage: 'Wrong test description:${lines.map((e) => '<$e>')}',
-        //   errorSeverity: ErrorSeverity.WARNING,
-        // );
-        // reporter.reportErrorForNode(code, node);
-        //
-        // // reporter.reportErrorForNode(code, node);
       }
     });
   }
@@ -83,7 +76,7 @@ class CorrectTestDescription extends DartLintRule {
         LintCode(
           name: 'correct-test-description',
           problemMessage: 'Wrong test description: $message',
-          errorSeverity: ErrorSeverity.WARNING,
+          errorSeverity: _errorSeverity,
         ),
         node,
       );
