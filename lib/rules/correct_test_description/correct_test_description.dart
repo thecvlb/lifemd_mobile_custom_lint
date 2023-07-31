@@ -9,7 +9,7 @@ class CorrectTestDescription extends DartLintRule {
   static const _code = const LintCode(
     name: 'correct-test-description',
     problemMessage: 'Wrong test description',
-    errorSeverity: ErrorSeverity.WARNING,
+    errorSeverity: ErrorSeverity.INFO,
   );
 
   List<String> get filesToAnalyze => const ['test/**.dart'];
