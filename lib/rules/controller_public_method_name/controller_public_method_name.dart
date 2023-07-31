@@ -3,14 +3,13 @@ import 'package:analyzer/error/error.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:analyzer/source/source_range.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:lifemd_mobile_custom_lint/type_utils.dart';
 
 class ControllerPublicMethodName extends DartLintRule {
   ControllerPublicMethodName() : super(code: _code);
 
   static const PREFIX = 'on';
 
-  /// Metadata about the warning that will show-up in the IDE.
-  /// This is used for `// ignore: code` and enabling/disabling the lint
   static const _code = LintCode(
     name: 'controller_public_method_name',
     problemMessage:
@@ -24,10 +23,8 @@ class ControllerPublicMethodName extends DartLintRule {
     CustomLintContext context,
   ) {
     context.registry.addClassDeclaration((node) {
-      final isController = node.declaredElement?.allSupertypes
-              .map((e) => e.element.name)
-              .contains('GetxController') ==
-          true;
+      final isController =
+          isControllerOrSubclass(node.declaredElement?.supertype);
 
       if (isController) {
         for (final member in node.members) {
@@ -64,7 +61,7 @@ class _ControllerPublicMethodNameFix extends DartFix {
     context.registry.addMethodDeclaration((node) {
       if (!analysisError.sourceRange.intersects(node.name.sourceRange)) return;
 
-      final currentName = node.name.toString();
+      final currentName = node.name.lexeme;
 
       final validName =
           '${ControllerPublicMethodName.PREFIX}${currentName[0].toUpperCase()}${currentName.substring(1)}';

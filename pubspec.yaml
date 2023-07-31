@@ -8,5 +8,5 @@ dependencies:
   # we will use an analyzer for inspecting Dart files
   analyzer:
   analyzer_plugin:
-  # custom_lint_builder will give us tools for writing lints
   custom_lint_builder:
+  meta: ^1.7.0
