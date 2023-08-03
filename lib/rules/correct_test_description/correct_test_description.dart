@@ -1,17 +1,13 @@
 import 'package:analyzer/dart/ast/ast.dart';
-import 'package:analyzer/error/error.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 
 class CorrectTestDescription extends DartLintRule {
   CorrectTestDescription() : super(code: _code);
 
-  static const _errorSeverity = ErrorSeverity.INFO;
-
   static const _code = const LintCode(
     name: 'correct-test-description',
     problemMessage: 'Wrong test description',
-    errorSeverity: _errorSeverity,
   );
 
   List<String> get filesToAnalyze => const ['test/**.dart'];
@@ -27,14 +23,14 @@ class CorrectTestDescription extends DartLintRule {
       final isTest = name == 'test';
       if (isTest) {
         final description = node.argumentList.arguments.first.toString();
-        // final lines = description.split("\n");
-        final givenPosition = description.indexOf("## Given:");
+
+        final givenPosition = description.indexOf("Given:");
         final isGivenExists = givenPosition >= 0;
 
-        final whenPosition = description.indexOf("## When:");
+        final whenPosition = description.indexOf("When:");
         final isWhenExists = whenPosition >= 0;
 
-        final thenPosition = description.indexOf("## Then");
+        final thenPosition = description.indexOf("Then");
         final isThenExists = thenPosition >= 0;
 
         /// Given (optional, but must be first)
@@ -58,11 +54,6 @@ class CorrectTestDescription extends DartLintRule {
                 'When should be first and Then should be second');
           }
         }
-
-        if (isThenExists && description.indexOf('should', thenPosition) <= 0) {
-          _reportErrorForNode(
-              reporter, node, 'Then section should have `should` word');
-        }
       }
     });
   }
@@ -76,7 +67,6 @@ class CorrectTestDescription extends DartLintRule {
         LintCode(
           name: 'correct-test-description',
           problemMessage: 'Wrong test description: $message',
-          errorSeverity: _errorSeverity,
         ),
         node,
       );
