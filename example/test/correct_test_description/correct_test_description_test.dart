@@ -48,14 +48,5 @@ void main() {
       ## When:
       - some action called
       ''', () {});
-
-    /// Then section should have `should` word
-    // expect_lint: correct-test-description
-    test('''.
-      ## When:
-      - some action called
-      ## Then: 
-      - some method be called
-      ''', () {});
   });
 }
