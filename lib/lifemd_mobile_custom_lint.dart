@@ -7,14 +7,16 @@ import 'rules/avoid_top_level_members_in_tests/avoid_top_level_members_in_tests.
 import 'rules/controller_public_member_documentation/controller_public_member_documentation.dart';
 import 'rules/controller_public_method_name/controller_public_method_name.dart';
 import 'rules/controller_public_mutable_property/controller_public_mutable_property.dart';
-import 'rules/correct_test_description/correct_test_description.dart';
 import 'rules/equtable_public_property_documentation/equtable_public_property_documentation.dart';
 import 'rules/list_all_equatable_fields/list_all_equatable_fields.dart';
 import 'rules/prefer_correct_edge_insets_constructor/prefer_correct_edge_insets_constructor.dart';
-import 'rules/prefer_correct_test_description_section_name/prefer_correct_test_description_section_name.dart';
-import 'rules/prefer_correct_test_description_then_should/prefer_correct_test_description_then_should.dart';
 import 'rules/prefer_correct_test_file_name/prefer_correct_test_file_name.dart';
 import 'rules/prefer_single_widget_per_file/prefer_single_widget_per_file.dart';
+import 'rules/test_description_format/test_description_format.dart';
+import 'rules/test_description_section_name/test_description_section_name.dart';
+import 'rules/test_description_sections/test_description_sections.dart';
+import 'rules/test_description_single_when_action/test_description_single_when_action.dart';
+import 'rules/test_description_then_should/test_description_then_should.dart';
 
 PluginBase createPlugin() => _MobileCustomLinter();
 
@@ -32,10 +34,12 @@ class _MobileCustomLinter extends PluginBase {
         EquatablePublicPropertyDocumentation(),
         ListAllEquatableFields(),
         PreferCorrectEdgeInsetsConstructor(),
-        PreferCorrectTestDescriptionSectionName(),
-        PreferCorrectTestDescriptionThenShould(),
         PreferCorrectTestFileName(),
         PreferSingleWidgetPerFile(),
-        CorrectTestDescription(),
+        TestDescriptionFormat(),
+        TestDescriptionSectionName(),
+        TestDescriptionSingleWhenAction(),
+        TestDescriptionThenShould(),
+        TestDescriptionSections(),
       ];
 }

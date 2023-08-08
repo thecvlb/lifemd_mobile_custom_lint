@@ -3,11 +3,13 @@ import 'package:analyzer/error/listener.dart';
 import 'package:analyzer/source/source_range.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 
-class PreferCorrectTestDescriptionSectionName extends DartLintRule {
-  PreferCorrectTestDescriptionSectionName() : super(code: _code);
+class TestDescriptionSectionName extends DartLintRule {
+  TestDescriptionSectionName() : super(code: _code);
+
+  static const _codeName = 'test-description-section-name';
 
   static const _code = const LintCode(
-    name: 'prefer-correct-test-description-section-name',
+    name: _codeName,
     problemMessage: 'Test description section name should start with `## `',
   );
 
@@ -54,7 +56,7 @@ class PreferCorrectTestDescriptionSectionName extends DartLintRule {
   ) =>
       reporter.reportErrorForOffset(
         LintCode(
-          name: 'prefer-correct-test-description-section-name',
+          name: _codeName,
           problemMessage:
               'Test description section name should start with `## `',
           correctionMessage: correctionMessage,
