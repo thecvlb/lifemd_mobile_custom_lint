@@ -1,10 +1,10 @@
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 
-class PreferCorrectTestDescriptionThenShould extends DartLintRule {
-  PreferCorrectTestDescriptionThenShould() : super(code: _code);
+class TestDescriptionThenShould extends DartLintRule {
+  TestDescriptionThenShould() : super(code: _code);
 
-  static const _codeName = 'prefer-correct-test-description-then-should';
+  static const _codeName = 'test-description-then-should';
 
   static const _noShouldMessage = 'Then section should have `should` word';
 
@@ -31,7 +31,7 @@ class PreferCorrectTestDescriptionThenShould extends DartLintRule {
         final descriptionNode = node.argumentList.arguments.first;
         final description = descriptionNode.toString();
 
-        final thenMatch = RegExp(r'(?:(?:#{1,2})\s?)?(?:Then(?:\s(should))?):')
+        final thenMatch = RegExp(r'(?:#{1,2}\s?)?Then(?:\s(should))?:')
             .firstMatch(description);
         if (thenMatch != null) {
           /// if `## Then should`:

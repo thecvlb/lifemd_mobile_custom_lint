@@ -1,22 +1,21 @@
+// ignore_for_file: test-description-format
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('onInit', () {
-    /// Then section should have single `should` word
     test('''.
+      // expect_lint: test-description-single-when-action
       ## When:
       - some action called
-      // expect_lint: prefer-correct-test-description-then-should
+      - some second action called
       ## Then should: 
-      - some method should be called
+      - some method called
       ''', () {});
 
-    /// Then section should have `should` word
     test('''.
       ## When:
       - some action called
-      // expect_lint: prefer-correct-test-description-then-should
-      ## Then: 
+      ## Then should: 
       - some method be called
       ''', () {});
   });

@@ -2,11 +2,12 @@ import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 
-class CorrectTestDescription extends DartLintRule {
-  CorrectTestDescription() : super(code: _code);
+class TestDescriptionSections extends DartLintRule {
+  TestDescriptionSections() : super(code: _code);
 
+  static const _codeName = 'test-description-sections';
   static const _code = const LintCode(
-    name: 'correct-test-description',
+    name: _codeName,
     problemMessage: 'Wrong test description',
   );
 
@@ -65,7 +66,7 @@ class CorrectTestDescription extends DartLintRule {
   ) =>
       reporter.reportErrorForNode(
         LintCode(
-          name: 'correct-test-description',
+          name: _codeName,
           problemMessage: 'Wrong test description: $message',
         ),
         node,
