@@ -19,6 +19,7 @@ import 'rules/test_description_format/test_description_format.dart';
 import 'rules/test_description_section_name/test_description_section_name.dart';
 import 'rules/test_description_sections/test_description_sections.dart';
 import 'rules/test_description_single_when_action/test_description_single_when_action.dart';
+import 'rules/test_description_then_avoid_some/test_description_then_avoid_some.dart';
 import 'rules/test_description_then_should/test_description_then_should.dart';
 
 PluginBase createPlugin() => _MobileCustomLinter();
@@ -45,6 +46,7 @@ class _MobileCustomLinter extends PluginBase {
         TestDescriptionFormat(),
         TestDescriptionSectionName(),
         TestDescriptionSingleWhenAction(),
+        TestDescriptionThenAvoidSome(),
         TestDescriptionThenShould(),
         TestDescriptionSections(),
       ];
