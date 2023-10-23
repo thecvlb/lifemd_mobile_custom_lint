@@ -232,4 +232,36 @@ void main() {
       foo();
     });
   });
+
+  group('Avoid using `When-Then` section in the test body', () {
+    test('''.
+      ## Given: 
+      - some method should be called
+      ## Then: 
+      - some method should be called
+      ''', ()
+        // expect_lint: test-body-sections
+        {
+      // Given
+      foo();
+
+      // When-Then
+      foo();
+    });
+
+    test('''.
+      ## Given: 
+      - some method should be called
+      ## Then: 
+      - some method should be called
+      ''', ()
+        // expect_lint: test-body-sections
+        {
+      // Given
+      foo();
+
+      // When - Then
+      foo();
+    });
+  });
 }
