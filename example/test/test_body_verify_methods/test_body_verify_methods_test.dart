@@ -1,4 +1,4 @@
-// ignore_for_file: test-description-single-when-action
+// ignore_for_file: test-description-single-when-action, test-body-sections
 import 'package:flutter_test/flutter_test.dart';
 
 import 'flutter_defines.dart';
