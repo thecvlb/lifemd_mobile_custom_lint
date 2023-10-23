@@ -12,6 +12,7 @@ import 'rules/list_all_equatable_fields/list_all_equatable_fields.dart';
 import 'rules/prefer_correct_edge_insets_constructor/prefer_correct_edge_insets_constructor.dart';
 import 'rules/prefer_correct_test_file_name/prefer_correct_test_file_name.dart';
 import 'rules/prefer_single_widget_per_file/prefer_single_widget_per_file.dart';
+import 'rules/test_body_verify_methods/test_body_verify_methods.dart';
 import 'rules/test_description_format/test_description_format.dart';
 import 'rules/test_description_section_name/test_description_section_name.dart';
 import 'rules/test_description_sections/test_description_sections.dart';
@@ -36,6 +37,7 @@ class _MobileCustomLinter extends PluginBase {
         PreferCorrectEdgeInsetsConstructor(),
         PreferCorrectTestFileName(),
         PreferSingleWidgetPerFile(),
+        TestBodyVerifyMethods(),
         TestDescriptionFormat(),
         TestDescriptionSectionName(),
         TestDescriptionSingleWhenAction(),

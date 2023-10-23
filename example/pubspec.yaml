@@ -5,7 +5,7 @@ environment:
   sdk: '>=3.0.6 <4.0.0'
 
 dev_dependencies:
-  custom_lint: ^0.5.0
+  custom_lint: ^0.5.4
   lifemd_mobile_custom_lint:
     path: ../
   flutter_test: # unit tests

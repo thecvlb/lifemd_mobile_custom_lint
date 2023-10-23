@@ -6,7 +6,7 @@ environment:
 
 dependencies:
   # we will use an analyzer for inspecting Dart files
-  analyzer: ^5.7.0 # unable to update because of `custom_lint_builder`
-  analyzer_plugin: ^0.11.2
-  custom_lint_builder: ^0.5.0
-  meta: ^1.7.0
+  analyzer: ^6.2.0
+  analyzer_plugin: ^0.11.3
+  custom_lint_builder: ^0.5.4
+  meta: ^1.9.1

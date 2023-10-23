@@ -1,4 +1,4 @@
-// ignore_for_file: test-description-format
+// ignore_for_file: test-description-format, test-body-verify-methods
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

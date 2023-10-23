@@ -1,4 +1,4 @@
-// ignore_for_file: test-description-single-when-action
+// ignore_for_file: test-description-single-when-action, test-body-verify-methods
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
