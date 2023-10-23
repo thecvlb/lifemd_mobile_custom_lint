@@ -2,6 +2,7 @@
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 
 import 'rules/avoid_expanded_as_spacer/avoid_expanded_as_spacer.dart';
+import 'rules/avoid_print_and_get_log/avoid_print_and_get_log.dart';
 import 'rules/avoid_single_child_in_row_and_column/avoid_single_child_in_row_and_column.dart';
 import 'rules/avoid_top_level_members_in_tests/avoid_top_level_members_in_tests.dart';
 import 'rules/controller_public_member_documentation/controller_public_member_documentation.dart';
@@ -27,6 +28,7 @@ class _MobileCustomLinter extends PluginBase {
   @override
   List<LintRule> getLintRules(CustomLintConfigs configs) => [
         AvoidExpandedAsSpacer(),
+        AvoidPrintAndGetLog(),
         AvoidSingleChildInRowAndColumn(),
         AvoidTopLevelMembersInTests(),
         ControllerPublicMemberDocumentation(),
