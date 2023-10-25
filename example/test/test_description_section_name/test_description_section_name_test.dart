@@ -1,3 +1,4 @@
+// ignore_for_file: test-body-verify-methods, test-body-sections, test-description-then-avoid-some
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
