@@ -36,6 +36,10 @@ class TestBodySections extends DartLintRule {
           return;
         }
 
+        if (body.parent?.parent?.parent != node) {
+          return;
+        }
+
         final commentVisitor = _CommentVisitor();
         commentVisitor.visitComments(body);
         final comments = commentVisitor.comments;
@@ -67,31 +71,48 @@ class TestBodySections extends DartLintRule {
         if (isGivenDescriptionExists && givenBodyCount == 0) {
           _reportErrorForNode(reporter, body,
               'Test description contains `Given` section but body does not');
+          return;
+        }
+
+        final isWhenThenBodyExist = comments.any((element) =>
+            RegExp(r'//\s*When\s*-\s*Then', caseSensitive: false)
+                .allMatches(element)
+                .isNotEmpty);
+
+        if (isWhenThenBodyExist) {
+          _reportErrorForNode(reporter, body,
+              'Avoid using `When-Then` section in the test body');
+          return;
         }
 
         if (isWhenDescriptionExists && whenBodyCount == 0) {
           _reportErrorForNode(reporter, body,
               'Test description contains `When` section but body does not');
+          return;
         }
 
         if (isThenDescriptionExists && thenBodyCount == 0) {
           _reportErrorForNode(reporter, body,
               'Test description contains `Then` section but body does not');
+          return;
         }
 
         if (givenBodyCount > 1) {
           _reportErrorForNode(
               reporter, body, 'Test body should have only one `Given` section');
+          return;
         }
 
         if (whenBodyCount > 1) {
           _reportErrorForNode(
               reporter, body, 'Test body should have only one `When` section');
+          return;
         }
 
         if (thenBodyCount > 1) {
           _reportErrorForNode(
               reporter, body, 'Test body should have only one `Then` section');
+          return;
         }
 
         final descriptionSections = _getSections(
