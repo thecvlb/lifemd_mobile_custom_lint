@@ -41,9 +41,9 @@ class _MethodInvocationVisitor extends RecursiveAstVisitor<void> {
   final methods = <String>[];
 
   @override
-  void visitMethodInvocation(MethodInvocation node) {
-    super.visitMethodInvocation(node);
+  void visitFunctionExpressionInvocation(FunctionExpressionInvocation node) {
+    super.visitFunctionExpressionInvocation(node);
 
-    methods.add(node.methodName.name);
+    methods.add(node.function.toString());
   }
 }
