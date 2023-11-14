@@ -6,7 +6,6 @@ import 'flutter_defines.dart';
 void main() {
   group('onInit', () {
     // Several `verify`
-    // expect_lint: test-body-verify-methods
     test('''.
       ## Given:
       - some given condition
@@ -14,13 +13,13 @@ void main() {
       - some method should be called
       ''', () {
       // Then
+      // expect_lint: test-body-verify-methods
       verify(() => {});
+      // expect_lint: test-body-verify-methods
       verify(() => {});
-      // verifyInOrder([() => {}]);
     });
 
     // Several `verify`: `verify` and `verifyInOrder`
-    // expect_lint: test-body-verify-methods
     test('''.
       ## Given:
       - some given condition
@@ -28,12 +27,13 @@ void main() {
       - some method should be called
       ''', () {
       // Then
+      // expect_lint: test-body-verify-methods
       verify(() => {});
+      // expect_lint: test-body-verify-methods
       verifyInOrder([() => {}]);
     });
 
     // Several `verifyInOrder`
-    // expect_lint: test-body-verify-methods
     test('''.
       ## Given:
       - some given condition
@@ -41,7 +41,9 @@ void main() {
       - some method should be called
       ''', () {
       // Then
+      // expect_lint: test-body-verify-methods
       verifyInOrder([() => {}]);
+      // expect_lint: test-body-verify-methods
       verifyInOrder([() => {}]);
     });
 
