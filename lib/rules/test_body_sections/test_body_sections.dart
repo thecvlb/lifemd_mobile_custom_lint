@@ -195,7 +195,7 @@ class _CommentVisitor {
       }
 
       // Test section name should be single line comment
-      if (extractedComments.length == 1) {
+      if (extractedComments.isNotEmpty) {
         comments.add(extractedComments.first.lexeme);
       }
 
