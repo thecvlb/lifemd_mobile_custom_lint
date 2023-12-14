@@ -22,6 +22,9 @@ class ControllerPublicMutableProperty extends DartLintRule {
 
   static const _listChecker = TypeChecker.fromName('List');
 
+  static const _unmodifiableListChecker =
+      TypeChecker.fromName('UnmodifiableListView');
+
   static const _listCorrectionMessage =
       'UnmodifiableListView or Iterable should be used instead of List';
   static const _rxCorrectionMessage =
@@ -60,7 +63,8 @@ class ControllerPublicMutableProperty extends DartLintRule {
               );
             }
 
-            if (_listChecker.isAssignableFromType(declaredElement.type)) {
+            if (_listChecker.isAssignableFromType(declaredElement.type) &&
+                !_unmodifiableListChecker.isExactlyType(declaredElement.type)) {
               reporter.reportErrorForNode(
                 const LintCode(
                   name: _codename,

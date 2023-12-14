@@ -33,7 +33,13 @@ class TestBodyVerifyMethods extends DartLintRule {
           return;
         }
 
-        if (body.parent?.parent?.parent != node) {
+        final parent = body.parent?.parent?.parent;
+        if (parent is! MethodInvocation) {
+          return;
+        }
+
+        if (parent.methodName.name != 'test' &&
+            parent.methodName.name != 'fakeAsync') {
           return;
         }
 
