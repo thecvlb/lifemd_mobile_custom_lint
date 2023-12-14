@@ -66,7 +66,7 @@ class ControllerPublicMutableProperty extends DartLintRule {
             if (_listChecker.isAssignableFromType(declaredElement.type) &&
                 !_unmodifiableListChecker.isExactlyType(declaredElement.type)) {
               reporter.reportErrorForNode(
-                LintCode(
+                const LintCode(
                   name: _codename,
                   problemMessage: _problemMessage,
                   correctionMessage: _listCorrectionMessage,
