@@ -6,8 +6,8 @@ environment:
 
 dependencies:
   # we will use an analyzer for inspecting Dart files
-  analyzer: ^6.2.0
+  analyzer: ^6.4.1
   analyzer_plugin: ^0.11.3
-  custom_lint_builder: ^0.5.7
-  meta: ^1.9.1
+  custom_lint_builder: ^0.6.0
+  meta: ^1.12.0
   quiver: ^3.2.1
