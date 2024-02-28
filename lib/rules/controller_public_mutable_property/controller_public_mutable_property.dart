@@ -37,10 +37,11 @@ class ControllerPublicMutableProperty extends DartLintRule {
     CustomLintContext context,
   ) {
     context.registry.addClassDeclaration((node) {
-      final isController =
-          isControllerOrSubclass(node.declaredElement?.supertype);
+      final superType = node.declaredElement?.supertype;
 
-      if (isController) {
+      if (isControllerOrSubclass(superType) ||
+          isServiceOrSubclass(superType) ||
+          isDisposableServiceOrSubclass(superType)) {
         final fields =
             node.members.whereType<FieldDeclaration>().where((element) {
           final name = element.fields.variables.firstOrNull?.name.lexeme;

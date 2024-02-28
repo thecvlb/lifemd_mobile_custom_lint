@@ -54,3 +54,57 @@ class SomeInheritedController extends SomeController {
 
   Iterable<bool> somePublicBoolIterableProperty1 = [];
 }
+
+class SomeService extends GetxService {
+  // expect_lint: controller_public_mutable_property
+  Rx<bool> somePublicRxBoolProperty1 = Rx<bool>();
+
+  Rx<bool> _somePrivateRxBoolProperty1 = Rx<bool>();
+
+  // expect_lint: controller_public_mutable_property
+  RxBool anotherPublicRxBoolProperty1 = RxBool();
+
+  RxBool _anotherPrivateRxBoolProperty1 = RxBool();
+
+  // expect_lint: controller_public_mutable_property
+  RxList<bool> somePublicRxBoolListProperty1 = RxList<bool>();
+
+  RxList<bool> _somePrivateRxBoolListProperty1 = RxList<bool>();
+
+  // expect_lint: controller_public_mutable_property
+  List<bool> somePublicBoolListProperty1 = [];
+
+  List<bool> _somePrivateBoolListProperty1 = [];
+
+  UnmodifiableRxView<bool> somePublicUnmodifiableRxBoolProperty1 =
+      UnmodifiableRxView<bool>();
+
+  Iterable<bool> somePublicBoolIterableProperty1 = [];
+}
+
+class SomeInheritedService extends SomeService {
+  // expect_lint: controller_public_mutable_property
+  Rx<bool> somePublicRxBoolProperty1 = Rx<bool>();
+
+  Rx<bool> _somePrivateRxBoolProperty1 = Rx<bool>();
+
+  // expect_lint: controller_public_mutable_property
+  RxBool anotherPublicRxBoolProperty1 = RxBool();
+
+  RxBool _anotherPrivateRxBoolProperty1 = RxBool();
+
+  // expect_lint: controller_public_mutable_property
+  RxList<bool> somePublicRxBoolListProperty1 = RxList<bool>();
+
+  RxList<bool> _somePrivateRxBoolListProperty1 = RxList<bool>();
+
+  // expect_lint: controller_public_mutable_property
+  List<bool> somePublicBoolListProperty1 = [];
+
+  List<bool> _somePrivateBoolListProperty1 = [];
+
+  UnmodifiableRxView<bool> somePublicUnmodifiableRxBoolProperty1 =
+      UnmodifiableRxView<bool>();
+
+  Iterable<bool> somePublicBoolIterableProperty1 = [];
+}
