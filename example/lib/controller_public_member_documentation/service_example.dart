@@ -13,14 +13,14 @@ class SomeService extends GetxService {
   static const bool _somePrivateConst = false;
 
   // expect_lint: controller_public_member_documentation
-  void somePublicMethod() {}
-
-  void _somePrivateMethod() {}
-
-  // expect_lint: controller_public_member_documentation
   bool get somePublicGetter => true;
 
   bool get _somePrivateGetter => true;
+
+  // expect_lint: controller_public_member_documentation
+  void somePublicMethod() {}
+
+  void _somePrivateMethod() {}
 }
 
 class SomeInheritedService extends SomeService {
@@ -35,12 +35,12 @@ class SomeInheritedService extends SomeService {
   static const bool _somePrivateConst1 = false;
 
   // expect_lint: controller_public_member_documentation
-  void somePublicMethod1() {}
-
-  void _somePrivateMethod1() {}
-
-  // expect_lint: controller_public_member_documentation
   bool get somePublicGetter1 => true;
 
   bool get _somePrivateGetter1 => true;
+
+  // expect_lint: controller_public_member_documentation
+  void somePublicMethod1() {}
+
+  void _somePrivateMethod1() {}
 }
