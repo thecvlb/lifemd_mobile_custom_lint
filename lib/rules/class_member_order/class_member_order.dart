@@ -1,5 +1,6 @@
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/error/listener.dart';
+import 'package:collection/collection.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 
 import '../../type_utils.dart';
@@ -61,59 +62,11 @@ class ClassMemberOrder extends DartLintRule {
         return;
       }
 
-      final members = <_ClassMember>[];
-
-      // find all the members of the class
-      node.members.forEach((member) {
-        final isFieldDeclaration = member is FieldDeclaration;
-        final isConstructorDeclaration = member is ConstructorDeclaration;
-        final isMethodDeclaration = member is MethodDeclaration;
-
-        if (isFieldDeclaration) {
-          members.add(_ClassMember(
-            member: member,
-            type: _OrderedType.field,
-            name: member.fields.variables.first.name.lexeme,
-          ));
-        }
-
-        if (isConstructorDeclaration) {
-          members.add(_ClassMember(
-            member: member,
-            type: _getConstructorType(member),
-            name: member.name?.lexeme ?? '',
-          ));
-        }
-
-        if (isMethodDeclaration) {
-          members.add(_ClassMember(
-            member: member,
-            type: _getMethodType(member),
-            name: member.name.lexeme,
-          ));
-        }
-      });
+      final members = _getClassMembers(node);
 
       // determine the final properties initialized by the constructor
-      final initializers = <String>[];
-      members.forEach((member) {
-        if (member.member is ConstructorDeclaration) {
-          final constructor = member.member as ConstructorDeclaration;
-
-          constructor.initializers.forEach((initializer) {
-            if (initializer is ConstructorFieldInitializer) {
-              initializers.add(initializer.fieldName.name);
-            }
-          });
-
-          constructor.parameters.parameters.forEach((parameter) {
-            final name = parameter.name?.lexeme;
-            if (name != null) {
-              initializers.add(name);
-            }
-          });
-        }
-      });
+      final initializers = _getConstructorInitializers(
+          members.where((element) => element.member is ConstructorDeclaration));
 
       // change the type of the field to constructorField if it is initialized in the constructor
       for (int i = 0; i < members.length; i++) {
@@ -126,37 +79,56 @@ class ClassMemberOrder extends DartLintRule {
       }
 
       // find the not correct order of the members
-      for (int i = 0; i < members.length - 1; i++) {
-        final current = members[i];
-        final next = members[i + 1];
-
-        if (current.type.priority > next.type.priority) {
-          reporter.reportErrorForNode(
-            LintCode(
-              name: 'class_member_order',
-              problemMessage:
-                  'Wrong class member order: `${current.type.name}` should be after `${next.type.name}`',
-            ),
-            current.member,
-          );
-        }
-      }
-
-      // members.forEach((member) {
-      //   reporter.reportErrorForNode(
-      //     LintCode(
-      //       name: 'class_member_order',
-      //       // problemMessage:
-      //       //     'Mem:${member.declaredElement?.kind}->${member.declaredElement?.name},${member.declaredElement?.kind},$isFieldDeclaration',
-      //       problemMessage:
-      //           'Mem:${member.type}->${member.name}=>${member.member}->${members.length},',
-      //     ),
-      //     member.member,
-      //   );
-      // });
+      _findIncorrectOrder(members, reporter);
+      _findIncorrectOrderOfGetters(
+          members
+              .where((element) =>
+                  element.type == _OrderedType.field ||
+                  element.type == _OrderedType.getter)
+              .toList(),
+          reporter);
     });
   }
 
+  /// Get all the members of the class
+  List<_ClassMember> _getClassMembers(ClassDeclaration node) {
+    final members = <_ClassMember>[];
+
+    // find all the members of the class
+    node.members.forEach((member) {
+      final isFieldDeclaration = member is FieldDeclaration;
+      final isConstructorDeclaration = member is ConstructorDeclaration;
+      final isMethodDeclaration = member is MethodDeclaration;
+
+      if (isFieldDeclaration) {
+        members.add(_ClassMember(
+          member: member,
+          type: _OrderedType.field,
+          name: member.fields.variables.first.name.lexeme,
+        ));
+      }
+
+      if (isConstructorDeclaration) {
+        members.add(_ClassMember(
+          member: member,
+          type: _getConstructorType(member),
+          name: member.name?.lexeme ?? '',
+        ));
+      }
+
+      if (isMethodDeclaration) {
+        members.add(_ClassMember(
+          member: member,
+          type: _getMethodType(member),
+          name: member.name.lexeme,
+        ));
+      }
+    });
+
+    return members;
+  }
+
+  /// Get the type of the constructor
   _OrderedType _getConstructorType(ConstructorDeclaration member) {
     if (member.name == null) {
       return _OrderedType.unnamedConstructor;
@@ -177,11 +149,86 @@ class ClassMemberOrder extends DartLintRule {
     return _OrderedType.publicNamedConstructor;
   }
 
+  /// Get the type of the method
   _OrderedType _getMethodType(MethodDeclaration member) {
     if (member.isGetter) {
       return _OrderedType.getter;
     }
 
     return _OrderedType.methods;
+  }
+
+  /// Get the properties initialized by the constructor
+  List<String> _getConstructorInitializers(
+      Iterable<_ClassMember> constructors) {
+    final initializers = <String>[];
+    constructors.forEach((member) {
+      final constructor = member.member as ConstructorDeclaration;
+      constructor.initializers.forEach((initializer) {
+        if (initializer is ConstructorFieldInitializer) {
+          initializers.add(initializer.fieldName.name);
+        }
+      });
+
+      constructor.parameters.parameters.forEach((parameter) {
+        final name = parameter.name?.lexeme;
+        if (name != null) {
+          initializers.add(name);
+        }
+      });
+    });
+    return initializers;
+  }
+
+  /// Find the incorrect order of the members
+  /// depend on the priority of the type
+  void _findIncorrectOrder(List<_ClassMember> members, ErrorReporter reporter) {
+    for (int i = 0; i < members.length - 1; i++) {
+      final current = members[i];
+      final next = members[i + 1];
+
+      if (current.type.priority > next.type.priority) {
+        reporter.reportErrorForNode(
+          LintCode(
+            name: 'class_member_order',
+            problemMessage:
+                'Wrong class member order: `${current.type.name}` should be after `${next.type.name}`',
+          ),
+          current.member,
+        );
+      }
+    }
+  }
+
+  /// It's good practice to place a getter for private property right below it
+  void _findIncorrectOrderOfGetters(
+      List<_ClassMember> members, ErrorReporter reporter) {
+    members.forEachIndexed(
+      (index, element) {
+        final current = element;
+
+        // find public getter
+        if (current.type == _OrderedType.getter &&
+            !Identifier.isPrivateName(current.name)) {
+          // find the private field with the same name
+          final fieldIndex = members.indexWhere((member) =>
+              member.name == '_${current.name}' &&
+              member.type == _OrderedType.field);
+
+          if (fieldIndex >= 0 && fieldIndex != index - 1) {
+            final field = members[fieldIndex];
+
+            reporter.reportErrorForNode(
+              LintCode(
+                name: 'class_member_order',
+                problemMessage:
+                    'Wrong class member order: `${current.name}` should be placed below `${field.name}`',
+              ),
+              current.member,
+            );
+          }
+        }
+      },
+    );
   }
 }
