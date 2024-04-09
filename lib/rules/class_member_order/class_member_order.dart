@@ -6,15 +6,16 @@ import 'package:custom_lint_builder/custom_lint_builder.dart';
 import '../../type_utils.dart';
 
 enum _OrderedType {
+  staticMember(priority: 0, name: 'static member'),
   constructorField(
-      priority: 0, name: 'properties initialized by the constructor'),
-  unnamedConstructor(priority: 1, name: 'unnamed constructor'),
-  privateNamedConstructor(priority: 2, name: 'private named constructor'),
-  publicNamedConstructor(priority: 3, name: 'public named constructor'),
-  privateFactory(priority: 4, name: 'private factory'),
-  publicFactory(priority: 5, name: 'public factory'),
-  getter(priority: 6, name: 'getter'),
-  field(priority: 6, name: 'property'),
+      priority: 1, name: 'properties initialized by the constructor'),
+  unnamedConstructor(priority: 2, name: 'unnamed constructor'),
+  privateNamedConstructor(priority: 3, name: 'private named constructor'),
+  publicNamedConstructor(priority: 4, name: 'public named constructor'),
+  privateFactory(priority: 5, name: 'private factory'),
+  publicFactory(priority: 6, name: 'public factory'),
+  getter(priority: 7, name: 'getter'),
+  field(priority: 7, name: 'property'),
   methods(priority: 7, name: 'method');
 
   final int priority;
@@ -103,7 +104,8 @@ class ClassMemberOrder extends DartLintRule {
       if (isFieldDeclaration) {
         members.add(_ClassMember(
           member: member,
-          type: _OrderedType.field,
+          type:
+              member.isStatic ? _OrderedType.staticMember : _OrderedType.field,
           name: member.fields.variables.first.name.lexeme,
         ));
       }
