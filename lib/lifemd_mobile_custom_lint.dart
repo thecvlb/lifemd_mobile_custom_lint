@@ -1,11 +1,12 @@
 // This is the entrypoint of our custom linter
 import 'package:custom_lint_builder/custom_lint_builder.dart';
-import 'package:lifemd_mobile_custom_lint/rules/test_avoid_future_delayed/test_avoid_future_delayed.dart';
 
 import 'rules/avoid_expanded_as_spacer/avoid_expanded_as_spacer.dart';
+import 'rules/avoid_get_unmodifiable_rx_view/avoid_get_unmodifiable_rx_view.dart';
 import 'rules/avoid_print_and_get_log/avoid_print_and_get_log.dart';
 import 'rules/avoid_single_child_in_row_and_column/avoid_single_child_in_row_and_column.dart';
 import 'rules/avoid_top_level_members_in_tests/avoid_top_level_members_in_tests.dart';
+import 'rules/class_member_order/class_member_order.dart';
 import 'rules/controller_public_member_documentation/controller_public_member_documentation.dart';
 import 'rules/controller_public_method_name/controller_public_method_name.dart';
 import 'rules/controller_public_mutable_property/controller_public_mutable_property.dart';
@@ -15,6 +16,7 @@ import 'rules/prefer_correct_edge_insets_constructor/prefer_correct_edge_insets_
 import 'rules/prefer_correct_file_name/prefer_correct_file_name.dart';
 import 'rules/prefer_correct_test_file_name/prefer_correct_test_file_name.dart';
 import 'rules/prefer_single_widget_per_file/prefer_single_widget_per_file.dart';
+import 'rules/test_avoid_future_delayed/test_avoid_future_delayed.dart';
 import 'rules/test_body_sections/test_body_sections.dart';
 import 'rules/test_body_verify_methods/test_body_verify_methods.dart';
 import 'rules/test_description_format/test_description_format.dart';
@@ -32,9 +34,11 @@ class _MobileCustomLinter extends PluginBase {
   @override
   List<LintRule> getLintRules(CustomLintConfigs configs) => [
         AvoidExpandedAsSpacer(),
+        AvoidGetUnmodifiableRxView(),
         AvoidPrintAndGetLog(),
         AvoidSingleChildInRowAndColumn(),
         AvoidTopLevelMembersInTests(),
+        ClassMemberOrder(),
         ControllerPublicMemberDocumentation(),
         ControllerPublicMethodName(),
         ControllerPublicMutableProperty(),

@@ -1,9 +1,9 @@
 // ignore_for_file: list-all-equatable-fields
 class Person extends Equatable {
-  const Person(this.name);
-
   // expect_lint: equatable_public_property_documentation
   final String name;
+
+  const Person(this.name);
 
   @override
   List<Object> get props => [name];

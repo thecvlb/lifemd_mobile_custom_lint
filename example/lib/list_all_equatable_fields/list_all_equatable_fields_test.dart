@@ -1,8 +1,11 @@
 // ignore_for_file: equatable_public_property_documentation
 class SomePerson {
+  final String name;
+
   const SomePerson(this.name);
 
-  final String name;
+  @override
+  int get hashCode => name.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -10,26 +13,23 @@ class SomePerson {
       other is SomePerson &&
           runtimeType == other.runtimeType &&
           name == other.name;
-
-  @override
-  int get hashCode => name.hashCode;
 }
 
 class Person extends Equatable {
-  const Person(this.name);
-
   final String name;
+
+  const Person(this.name);
 
   @override
   List<Object> get props => [name];
 }
 
 class AnotherPerson extends Equatable {
-  const AnotherPerson(this.name, this.age);
-
   final String name;
 
   final int age;
+
+  const AnotherPerson(this.name, this.age);
 
   // expect_lint: list-all-equatable-fields
   @override
@@ -39,18 +39,18 @@ class AnotherPerson extends Equatable {
 class AndAnotherPerson extends Equatable {
   static final someProp = 'hello';
 
-  const AndAnotherPerson(this.name);
-
   final String name;
+
+  const AndAnotherPerson(this.name);
 
   @override
   List<Object> get props => [name];
 }
 
 class SubPerson extends AndAnotherPerson {
-  const SubPerson(this.value, String name) : super(name);
-
   final int value;
+
+  const SubPerson(this.value, String name) : super(name);
 
   // expect_lint: list-all-equatable-fields
   @override
