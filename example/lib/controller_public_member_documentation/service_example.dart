@@ -1,4 +1,4 @@
-// ignore_for_file: controller_public_method_name, unused_field, unused_element
+// ignore_for_file: controller_public_method_name, unused_field, unused_element, class_member_order
 import 'flutter_defines.dart';
 
 class SomeService extends GetxService {
