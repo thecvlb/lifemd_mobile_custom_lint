@@ -1,6 +1,7 @@
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:custom_lint_core/custom_lint_core.dart' as clc show LintCode;
 import 'package:lifemd_mobile_custom_lint/extensions/iterable_extensions.dart';
 
 enum _WidgetType {
@@ -27,7 +28,7 @@ class AvoidSingleChildInRowAndColumn extends DartLintRule {
 
   static const _problemMessage = 'should not has only one child';
 
-  static const _code = const LintCode(
+  static const _code = const clc.LintCode(
     name: _codeName,
     problemMessage: _problemMessage,
   );

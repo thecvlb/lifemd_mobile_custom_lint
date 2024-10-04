@@ -3,6 +3,7 @@ import 'package:analyzer/error/error.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:analyzer/source/source_range.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:custom_lint_core/custom_lint_core.dart' as clc show LintCode;
 import 'package:lifemd_mobile_custom_lint/type_utils.dart';
 
 class ControllerPublicMethodName extends DartLintRule {
@@ -10,7 +11,7 @@ class ControllerPublicMethodName extends DartLintRule {
 
   static const PREFIX = 'on';
 
-  static const _code = LintCode(
+  static const _code = clc.LintCode(
     name: 'controller_public_method_name',
     problemMessage:
         'Controller public method name should be on<SomethingHappened>',

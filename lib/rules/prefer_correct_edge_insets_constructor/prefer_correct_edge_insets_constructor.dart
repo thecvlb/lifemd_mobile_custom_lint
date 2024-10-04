@@ -4,6 +4,7 @@ import 'package:analyzer/error/listener.dart';
 import 'package:analyzer/source/source_range.dart';
 import 'package:collection/collection.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:custom_lint_core/custom_lint_core.dart' as clc show LintCode;
 
 import 'flutter_defines.dart';
 
@@ -18,7 +19,7 @@ class PreferCorrectEdgeInsetsConstructor extends DartLintRule {
   static const _constructorNameSymmetric = 'symmetric';
   static const _constructorNameOnly = 'only';
 
-  static const _code = const LintCode(
+  static const _code = const clc.LintCode(
     name: 'prefer-correct-edge-insets-constructor',
     problemMessage: 'Prefer using correct EdgeInsets constructor.',
     errorSeverity: ErrorSeverity.INFO,
@@ -53,7 +54,7 @@ class PreferCorrectEdgeInsetsConstructor extends DartLintRule {
         if (data != null) {
           final correctionMessage = _validate(data);
           if (correctionMessage != null) {
-            final code = LintCode(
+            final code = clc.LintCode(
               name: 'prefer-correct-edge-insets-constructor',
               problemMessage: 'Prefer using correct EdgeInsets constructor.',
               correctionMessage: correctionMessage,

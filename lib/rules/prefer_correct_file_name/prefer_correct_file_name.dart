@@ -1,11 +1,12 @@
 import 'package:analyzer/error/error.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:custom_lint_core/custom_lint_core.dart' as clc show LintCode;
 
 class PreferCorrectFileName extends DartLintRule {
   PreferCorrectFileName() : super(code: _code);
 
-  static const _code = const LintCode(
+  static const _code = const clc.LintCode(
     name: 'prefer-correct-file-name',
     problemMessage: 'File must be in snake case',
     errorSeverity: ErrorSeverity.WARNING,

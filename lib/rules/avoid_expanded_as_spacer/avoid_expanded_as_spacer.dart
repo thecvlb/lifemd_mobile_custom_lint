@@ -2,6 +2,7 @@ import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/error/error.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:custom_lint_core/custom_lint_core.dart' as clc show LintCode;
 
 class AvoidExpandedAsSpacer extends DartLintRule {
   AvoidExpandedAsSpacer() : super(code: _code);
@@ -10,7 +11,7 @@ class AvoidExpandedAsSpacer extends DartLintRule {
   static const _containerClassName = 'Container';
   static const _sizedBoxClassName = 'SizedBox';
 
-  static const _code = const LintCode(
+  static const _code = const clc.LintCode(
     name: 'avoid-expanded-as-spacer',
     problemMessage: 'Prefer using Spacer widget instead of Expanded.',
     correctionMessage: 'Replace with Spacer widget.',
