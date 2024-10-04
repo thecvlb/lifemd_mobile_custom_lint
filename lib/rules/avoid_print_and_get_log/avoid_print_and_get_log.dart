@@ -1,5 +1,6 @@
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:custom_lint_core/custom_lint_core.dart' as clc show LintCode;
 
 class AvoidPrintAndGetLog extends DartLintRule {
   AvoidPrintAndGetLog() : super(code: _code);
@@ -9,7 +10,7 @@ class AvoidPrintAndGetLog extends DartLintRule {
       'Should use `Talker` instead of `debugPrint` and `Get.log`';
 
   static const _code =
-      const LintCode(name: _codeName, problemMessage: _description);
+      const clc.LintCode(name: _codeName, problemMessage: _description);
 
   String _getDescription(method) => 'Should use `Talker` instead of `$method`';
 

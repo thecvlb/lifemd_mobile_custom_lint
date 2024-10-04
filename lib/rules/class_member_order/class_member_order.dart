@@ -2,6 +2,7 @@ import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:collection/collection.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:custom_lint_core/custom_lint_core.dart' as clc show LintCode;
 
 import '../../type_utils.dart';
 
@@ -46,7 +47,7 @@ class _ClassMember {
 class ClassMemberOrder extends DartLintRule {
   ClassMemberOrder() : super(code: _code);
 
-  static const _code = const LintCode(
+  static const _code = const clc.LintCode(
     name: 'class_member_order',
     problemMessage: 'Wrong order of class members',
   );

@@ -1,6 +1,7 @@
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:custom_lint_core/custom_lint_core.dart' as clc show LintCode;
 import 'package:lifemd_mobile_custom_lint/type_utils.dart';
 
 class ControllerPublicMutableProperty extends DartLintRule {
@@ -11,7 +12,7 @@ class ControllerPublicMutableProperty extends DartLintRule {
   static const _problemMessage =
       'Controller should not expose mutable public property';
 
-  static const _code = const LintCode(
+  static const _code = const clc.LintCode(
     name: _codename,
     problemMessage: _problemMessage,
   );

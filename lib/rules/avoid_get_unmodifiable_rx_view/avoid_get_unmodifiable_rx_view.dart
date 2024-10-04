@@ -3,6 +3,7 @@ import 'package:analyzer/error/error.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:analyzer/source/source_range.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:custom_lint_core/custom_lint_core.dart' as clc show LintCode;
 
 class AvoidGetUnmodifiableRxView extends DartLintRule {
   AvoidGetUnmodifiableRxView() : super(code: _code);
@@ -12,7 +13,7 @@ class AvoidGetUnmodifiableRxView extends DartLintRule {
       'If getter returns UnmodifiableRxView, it should be converted to final property';
 
   static const _code =
-      const LintCode(name: _codeName, problemMessage: _description);
+      const clc.LintCode(name: _codeName, problemMessage: _description);
 
   static const _checker = TypeChecker.fromName('UnmodifiableRxView');
 

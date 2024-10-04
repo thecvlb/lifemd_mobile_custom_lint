@@ -3,12 +3,13 @@ import 'package:analyzer/dart/ast/token.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:custom_lint_core/custom_lint_core.dart' as clc show LintCode;
 
 class TestBodyVerifyMethods extends DartLintRule {
   TestBodyVerifyMethods() : super(code: _code);
 
   static const _codeName = 'test-body-verify-methods';
-  static const _code = const LintCode(
+  static const _code = const clc.LintCode(
       name: _codeName,
       problemMessage:
           '`Then` section should not contain more than one verify method');

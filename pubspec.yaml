@@ -2,13 +2,17 @@ name: lifemd_mobile_custom_lint
 description: A custom lint rules for lifemd_patient_portal_mobile.
 
 environment:
-  sdk: '>=3.3.3 <4.0.0'
+  sdk: '>=3.5.0 <4.0.0'
 
 dependencies:
   # we will use an analyzer for inspecting Dart files
-  analyzer: ^6.4.1
+  analyzer: ^6.5.0
   analyzer_plugin: ^0.11.3
   collection: ^1.18.0
-  custom_lint_builder: ^0.6.4
+  custom_lint_builder: ^0.6.7
+  custom_lint_core: ^0.6.5
   meta: ^1.12.0
   quiver: ^3.2.1
+
+dependency_overrides:
+  rxdart: ^0.27.5

@@ -1,10 +1,11 @@
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:custom_lint_core/custom_lint_core.dart' as clc show LintCode;
 
 class TestDescriptionSingleWhenAction extends DartLintRule {
   TestDescriptionSingleWhenAction() : super(code: _code);
 
-  static const _code = const LintCode(
+  static const _code = const clc.LintCode(
     name: 'test-description-single-when-action',
     problemMessage: '`When` section should have a single action',
   );

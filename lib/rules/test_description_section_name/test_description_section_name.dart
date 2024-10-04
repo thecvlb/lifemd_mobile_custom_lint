@@ -2,13 +2,14 @@ import 'package:analyzer/error/error.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:analyzer/source/source_range.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:custom_lint_core/custom_lint_core.dart' as clc show LintCode;
 
 class TestDescriptionSectionName extends DartLintRule {
   TestDescriptionSectionName() : super(code: _code);
 
   static const _codeName = 'test-description-section-name';
 
-  static const _code = const LintCode(
+  static const _code = const clc.LintCode(
     name: _codeName,
     problemMessage: 'Test description section name should start with `## `',
   );
@@ -55,7 +56,7 @@ class TestDescriptionSectionName extends DartLintRule {
     String correctionMessage,
   ) =>
       reporter.reportErrorForOffset(
-        LintCode(
+        clc.LintCode(
           name: _codeName,
           problemMessage:
               'Test description section name should start with `## `',

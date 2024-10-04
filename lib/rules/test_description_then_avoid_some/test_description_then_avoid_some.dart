@@ -1,12 +1,13 @@
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:custom_lint_core/custom_lint_core.dart' as clc show LintCode;
 
 class TestDescriptionThenAvoidSome extends DartLintRule {
   TestDescriptionThenAvoidSome() : super(code: _code);
 
   static const _codeName = 'test-description-then-avoid-some';
 
-  static const _code = const LintCode(
+  static const _code = const clc.LintCode(
     name: _codeName,
     problemMessage:
         '`Then` section should not have `some` word. All things in `Then` should be facts and not assumptions.',

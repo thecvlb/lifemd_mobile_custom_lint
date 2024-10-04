@@ -3,12 +3,13 @@ import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/error/error.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:custom_lint_core/custom_lint_core.dart' as clc show LintCode;
 
 class TestAvoidFutureDelayed extends DartLintRule {
   TestAvoidFutureDelayed() : super(code: _code);
 
   static const _codeName = 'test-avoid-future-delayed';
-  static const _code = const LintCode(
+  static const _code = const clc.LintCode(
     name: _codeName,
     problemMessage:
         'Avoid using `Future.delayed` in tests. Use `fakeAsync` and `elapse` instead.',

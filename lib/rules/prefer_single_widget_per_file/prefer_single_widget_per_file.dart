@@ -2,12 +2,13 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/error/error.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:custom_lint_core/custom_lint_core.dart' as clc show LintCode;
 import 'package:lifemd_mobile_custom_lint/type_utils.dart';
 
 class PreferSingleWidgetPerFile extends DartLintRule {
   PreferSingleWidgetPerFile() : super(code: _code);
 
-  static const _code = const LintCode(
+  static const _code = const clc.LintCode(
     name: 'prefer-single-widget-per-file',
     problemMessage: 'File must contains only one public widget',
     errorSeverity: ErrorSeverity.WARNING,

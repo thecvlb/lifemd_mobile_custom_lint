@@ -6,12 +6,13 @@ import 'package:analyzer/error/error.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:collection/collection.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:custom_lint_core/custom_lint_core.dart' as clc show LintCode;
 import 'package:lifemd_mobile_custom_lint/type_utils.dart';
 
 class ListAllEquatableFields extends DartLintRule {
   ListAllEquatableFields() : super(code: _code);
 
-  static const _code = const LintCode(
+  static const _code = const clc.LintCode(
     name: 'list-all-equatable-fields',
     problemMessage: 'All equatable fields must be added to props',
   );
@@ -69,7 +70,7 @@ class ListAllEquatableFields extends DartLintRule {
 
         if (!usedFields.containsAll(fieldNames)) {
           final missingFields = fieldNames.difference(usedFields).join(', ');
-          final newCode = LintCode(
+          final newCode = clc.LintCode(
             name: 'list-all-equatable-fields',
             problemMessage: 'Missing declared class fields: $missingFields',
             correctionMessage: 'Add to declaration: $missingFields ',

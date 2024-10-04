@@ -1,6 +1,7 @@
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:custom_lint_core/custom_lint_core.dart' as clc show LintCode;
 import 'package:lifemd_mobile_custom_lint/type_utils.dart';
 
 enum _ClassType {
@@ -15,7 +16,7 @@ enum _ClassType {
 class ControllerPublicMemberDocumentation extends DartLintRule {
   ControllerPublicMemberDocumentation() : super(code: _code);
 
-  static const _code = const LintCode(
+  static const _code = const clc.LintCode(
     name: 'controller_public_member_documentation',
     problemMessage: 'Public member should have documentation',
   );

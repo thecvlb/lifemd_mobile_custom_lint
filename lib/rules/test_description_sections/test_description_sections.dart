@@ -1,12 +1,13 @@
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:custom_lint_core/custom_lint_core.dart' as clc show LintCode;
 
 class TestDescriptionSections extends DartLintRule {
   TestDescriptionSections() : super(code: _code);
 
   static const _codeName = 'test-description-sections';
-  static const _code = const LintCode(
+  static const _code = const clc.LintCode(
     name: _codeName,
     problemMessage: 'Wrong test description',
   );
