@@ -23,32 +23,32 @@ class AvoidTopLevelMembersInTests extends DartLintRule {
   ) async {
     context.registry.addClassDeclaration((node) {
       if (!Identifier.isPrivateName(node.name.lexeme)) {
-        reporter.reportErrorForNode(code, node);
+        reporter.atNode(node, code);
       }
     });
 
     context.registry.addMixinDeclaration((node) {
       if (!Identifier.isPrivateName(node.name.lexeme)) {
-        reporter.reportErrorForNode(code, node);
+        reporter.atNode(node, code);
       }
     });
 
     context.registry.addExtensionDeclaration((node) {
       final name = node.name?.lexeme;
       if (name != null && !Identifier.isPrivateName(name)) {
-        reporter.reportErrorForNode(code, node);
+        reporter.atNode(node, code);
       }
     });
 
     context.registry.addEnumDeclaration((node) {
       if (!Identifier.isPrivateName(node.name.lexeme)) {
-        reporter.reportErrorForNode(code, node);
+        reporter.atNode(node, code);
       }
     });
 
     context.registry.addTypeAlias((node) {
       if (!Identifier.isPrivateName(node.name.lexeme)) {
-        reporter.reportErrorForNode(code, node);
+        reporter.atNode(node, code);
       }
     });
 
@@ -57,7 +57,7 @@ class AvoidTopLevelMembersInTests extends DartLintRule {
 
       if (variables.isNotEmpty &&
           !Identifier.isPrivateName(variables.first.name.lexeme)) {
-        reporter.reportErrorForNode(code, node);
+        reporter.atNode(node, code);
       }
     });
 
@@ -68,7 +68,7 @@ class AvoidTopLevelMembersInTests extends DartLintRule {
       final isTop = node.parent == null || node.parent?.offset == 0;
 
       if (!isEntryPoint && !Identifier.isPrivateName(name) && isTop) {
-        reporter.reportErrorForNode(code, node);
+        reporter.atNode(node, code);
       }
     });
   }

@@ -46,27 +46,27 @@ class ControllerPublicMemberDocumentation extends DartLintRule {
                 member.declaredElement?.isPublic == true &&
                 member.declaredElement?.hasOverride != true) {
               /// Highlighting only method name
-              reporter.reportErrorForOffset(
-                LintCode(
+              reporter.atOffset(
+                offset: member.name.offset,
+                length: member.declaredElement!.name.length,
+                errorCode: clc.LintCode(
                   name: 'controller_public_member_documentation',
                   problemMessage:
                       "${type.name}'s public member should have documentation",
                 ),
-                member.name.offset,
-                member.declaredElement!.name.length,
               );
             }
 
             if (member is FieldDeclaration &&
                 member.fields.variables.every(
                     (element) => element.declaredElement?.isPublic == true)) {
-              reporter.reportErrorForNode(
-                LintCode(
+              reporter.atNode(
+                member,
+                clc.LintCode(
                   name: 'controller_public_member_documentation',
                   problemMessage:
                       "${type.name}'s public member should have documentation",
                 ),
-                member,
               );
             }
           }

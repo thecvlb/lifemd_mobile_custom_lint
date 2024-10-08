@@ -33,10 +33,10 @@ class PreferSingleWidgetPerFile extends DartLintRule {
 
     if (publicWidgets.length > 1) {
       for (final widget in publicWidgets) {
-        reporter.reportErrorForOffset(
-          code,
-          widget.declaration.nameOffset,
-          widget.declaration.nameLength,
+        reporter.atOffset(
+          errorCode: code,
+          offset: widget.declaration.nameOffset,
+          length: widget.declaration.nameLength,
         );
       }
     }

@@ -25,7 +25,7 @@ class PreferCorrectTestFileName extends DartLintRule {
         final name = node.name.lexeme;
         final isEntryPoint = name == 'main';
         if (isEntryPoint) {
-          reporter.reportErrorForNode(code, node);
+          reporter.atNode(node, code);
         }
       });
     }

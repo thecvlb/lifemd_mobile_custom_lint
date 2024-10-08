@@ -54,7 +54,7 @@ class TestDescriptionFormat extends DartLintRule {
                 (offset < previousOffset &&
                     offset >= startOffset &&
                     (offset - startOffset).isEven))) {
-              reporter.reportErrorForNode(code, node);
+              reporter.atNode(node, code);
 
               return;
             }

@@ -165,12 +165,12 @@ class TestBodySections extends DartLintRule {
     AstNode node,
     String message,
   ) =>
-      reporter.reportErrorForNode(
-        LintCode(
+      reporter.atNode(
+        node,
+        clc.LintCode(
           name: _codeName,
           problemMessage: 'Wrong test body: $message',
         ),
-        node,
       );
 }
 

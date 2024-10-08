@@ -191,13 +191,13 @@ class ClassMemberOrder extends DartLintRule {
       final next = members[i + 1];
 
       if (current.type.priority > next.type.priority) {
-        reporter.reportErrorForNode(
-          LintCode(
+        reporter.atNode(
+          current.member,
+          clc.LintCode(
             name: 'class_member_order',
             problemMessage:
                 'Wrong class member order: `${current.type.name}` should be after `${next.type.name}`',
           ),
-          current.member,
         );
       }
     }
@@ -221,13 +221,13 @@ class ClassMemberOrder extends DartLintRule {
           if (fieldIndex >= 0 && fieldIndex != index - 1) {
             final field = members[fieldIndex];
 
-            reporter.reportErrorForNode(
-              LintCode(
+            reporter.atNode(
+              current.member,
+              clc.LintCode(
                 name: 'class_member_order',
                 problemMessage:
                     'Wrong class member order: `${current.name}` should be placed below `${field.name}`',
               ),
-              current.member,
             );
           }
         }

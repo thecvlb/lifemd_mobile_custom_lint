@@ -63,10 +63,10 @@ class TestBodyVerifyMethods extends DartLintRule {
 
         if (verifyMethods.length > 1) {
           for (final node in verifyMethods) {
-            reporter.reportErrorForOffset(
-              _code,
-              node.offset,
-              node.function.length,
+            reporter.atOffset(
+              errorCode: _code,
+              offset: node.offset,
+              length: node.function.length,
             );
           }
         }

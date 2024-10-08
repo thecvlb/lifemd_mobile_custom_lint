@@ -22,7 +22,7 @@ class PreferCorrectFileName extends DartLintRule {
   ) async {
     if (!_regExp.hasMatch(resolver.source.shortName)) {
       context.registry.addClassDeclaration((node) {
-        reporter.reportErrorForNode(code, node);
+        reporter.atNode(node, code);
       });
     }
   }

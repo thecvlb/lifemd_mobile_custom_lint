@@ -79,12 +79,12 @@ class TestDescriptionThenShould extends DartLintRule {
     int length,
     String message,
   ) =>
-      reporter.reportErrorForOffset(
-        LintCode(
+      reporter.atOffset(
+        errorCode: clc.LintCode(
           name: _codeName,
           problemMessage: message,
         ),
-        offset,
-        length,
+        offset: offset,
+        length: length,
       );
 }

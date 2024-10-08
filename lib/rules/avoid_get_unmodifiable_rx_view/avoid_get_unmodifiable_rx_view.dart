@@ -27,7 +27,7 @@ class AvoidGetUnmodifiableRxView extends DartLintRule {
       if (node.isGetter &&
           node.returnType?.type != null &&
           _checker.isAssignableFromType(node.returnType!.type!)) {
-        reporter.reportErrorForNode(_code, node);
+        reporter.atNode(node, _code);
       }
     });
   }
