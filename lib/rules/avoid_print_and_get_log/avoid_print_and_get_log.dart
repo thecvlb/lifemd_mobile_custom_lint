@@ -22,16 +22,18 @@ class AvoidPrintAndGetLog extends DartLintRule {
   ) async {
     context.registry.addMethodInvocation((node) {
       if (node.methodName.name == 'debugPrint') {
-        reporter.reportErrorForNode(
-            LintCode(
-                name: _codeName, problemMessage: _getDescription('debugPrint')),
-            node);
+        reporter.atNode(
+          node,
+          clc.LintCode(
+              name: _codeName, problemMessage: _getDescription('debugPrint')),
+        );
       }
       if (node.methodName.name == 'log' && node.target.toString() == 'Get') {
-        reporter.reportErrorForNode(
-            LintCode(
-                name: _codeName, problemMessage: _getDescription('Get.log')),
-            node);
+        reporter.atNode(
+          node,
+          clc.LintCode(
+              name: _codeName, problemMessage: _getDescription('Get.log')),
+        );
       }
     });
   }

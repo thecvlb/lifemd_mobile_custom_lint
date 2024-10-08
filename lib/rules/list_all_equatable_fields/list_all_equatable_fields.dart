@@ -76,7 +76,7 @@ class ListAllEquatableFields extends DartLintRule {
             correctionMessage: 'Add to declaration: $missingFields ',
             errorSeverity: ErrorSeverity.WARNING,
           );
-          reporter.reportErrorForNode(newCode, props);
+          reporter.atNode(props, newCode);
         }
       }
     });
