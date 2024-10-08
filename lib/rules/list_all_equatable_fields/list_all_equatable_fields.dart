@@ -42,7 +42,7 @@ class ListAllEquatableFields extends DartLintRule {
           .whereNot((field) => field.isStatic)
           .map((declaration) =>
               declaration.fields.variables.firstOrNull?.name.lexeme)
-          .whereNotNull()
+          .nonNulls
           .toSet();
 
       if (isMixin) {
