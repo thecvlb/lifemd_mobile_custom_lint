@@ -32,9 +32,7 @@ class PreferCorrectEdgeInsetsConstructor extends DartLintRule {
     CustomLintContext context,
   ) async {
     context.registry.addInstanceCreationExpression((node) {
-      final className = node.staticType?.getDisplayString(
-        withNullability: true,
-      );
+      final className = node.staticType?.getDisplayString();
 
       final constructorName = node.constructorName.name?.name;
 
@@ -61,7 +59,7 @@ class PreferCorrectEdgeInsetsConstructor extends DartLintRule {
               errorSeverity: ErrorSeverity.INFO,
             );
 
-            reporter.reportErrorForNode(code, node);
+            reporter.atNode(node, code);
           }
         }
       }

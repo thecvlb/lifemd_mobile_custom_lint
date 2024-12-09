@@ -55,25 +55,25 @@ class ControllerPublicMutableProperty extends DartLintRule {
           if (declaredElement != null) {
             if (_rxChecker.isAssignableFromType(declaredElement.type) ||
                 _rxListChecker.isAssignableFromType(declaredElement.type)) {
-              reporter.reportErrorForNode(
-                const LintCode(
+              reporter.atNode(
+                field,
+                const clc.LintCode(
                   name: _codename,
                   problemMessage: _problemMessage,
                   correctionMessage: _rxCorrectionMessage,
                 ),
-                field,
               );
             }
 
             if (_listChecker.isAssignableFromType(declaredElement.type) &&
                 !_unmodifiableListChecker.isExactlyType(declaredElement.type)) {
-              reporter.reportErrorForNode(
-                const LintCode(
+              reporter.atNode(
+                field,
+                const clc.LintCode(
                   name: _codename,
                   problemMessage: _problemMessage,
                   correctionMessage: _listCorrectionMessage,
                 ),
-                field,
               );
             }
           }

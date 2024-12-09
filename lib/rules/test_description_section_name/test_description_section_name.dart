@@ -55,15 +55,15 @@ class TestDescriptionSectionName extends DartLintRule {
     int length,
     String correctionMessage,
   ) =>
-      reporter.reportErrorForOffset(
-        clc.LintCode(
+      reporter.atOffset(
+        errorCode: clc.LintCode(
           name: _codeName,
           problemMessage:
               'Test description section name should start with `## `',
           correctionMessage: correctionMessage,
         ),
-        offset,
-        length,
+        offset: offset,
+        length: length,
       );
 }
 

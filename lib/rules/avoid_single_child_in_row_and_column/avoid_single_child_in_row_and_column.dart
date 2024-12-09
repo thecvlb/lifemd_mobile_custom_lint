@@ -40,9 +40,7 @@ class AvoidSingleChildInRowAndColumn extends DartLintRule {
     CustomLintContext context,
   ) async {
     context.registry.addInstanceCreationExpression((node) {
-      final className = node.staticType?.getDisplayString(
-        withNullability: true,
-      );
+      final className = node.staticType?.getDisplayString();
 
       final type = _WidgetType.fromString(className);
 
@@ -52,13 +50,14 @@ class AvoidSingleChildInRowAndColumn extends DartLintRule {
         final childrenNode = children.firstOrNull?.childEntities.lastOrNull;
 
         if (childrenNode is ListLiteral && childrenNode.elements.length == 1) {
-          reporter.reportErrorForNode(
-              LintCode(
-                name: _codeName,
-                problemMessage: '${type.name} $_problemMessage',
-                correctionMessage: 'Remove unnecessary ${type.name}',
-              ),
-              node);
+          reporter.atNode(
+            node,
+            clc.LintCode(
+              name: _codeName,
+              problemMessage: '${type.name} $_problemMessage',
+              correctionMessage: 'Remove unnecessary ${type.name}',
+            ),
+          );
         }
       }
     });

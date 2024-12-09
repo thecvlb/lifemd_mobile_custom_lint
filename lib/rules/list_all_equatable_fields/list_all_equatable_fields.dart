@@ -42,7 +42,7 @@ class ListAllEquatableFields extends DartLintRule {
           .whereNot((field) => field.isStatic)
           .map((declaration) =>
               declaration.fields.variables.firstOrNull?.name.lexeme)
-          .whereNotNull()
+          .nonNulls
           .toSet();
 
       if (isMixin) {
@@ -76,7 +76,7 @@ class ListAllEquatableFields extends DartLintRule {
             correctionMessage: 'Add to declaration: $missingFields ',
             errorSeverity: ErrorSeverity.WARNING,
           );
-          reporter.reportErrorForNode(newCode, props);
+          reporter.atNode(props, newCode);
         }
       }
     });

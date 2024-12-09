@@ -34,10 +34,10 @@ class ControllerPublicMethodName extends DartLintRule {
             if (element?.isPublic == true &&
                 !element!.name.startsWith(PREFIX)) {
               /// Highlighting only method name
-              reporter.reportErrorForOffset(
-                code,
-                member.name.offset,
-                element.name.length,
+              reporter.atOffset(
+                errorCode: code,
+                offset: member.name.offset,
+                length: element.name.length,
               );
             }
           }

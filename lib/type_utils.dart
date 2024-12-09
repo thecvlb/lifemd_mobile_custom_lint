@@ -4,8 +4,7 @@ import 'package:analyzer/dart/element/type.dart';
 bool isWidgetOrSubclass(DartType? type) =>
     _isWidget(type) || _isSubclassOfWidget(type);
 
-bool _isWidget(DartType? type) =>
-    type?.getDisplayString(withNullability: false) == 'Widget';
+bool _isWidget(DartType? type) => type?.getDisplayString() == 'Widget';
 
 bool _isSubclassOfWidget(DartType? type) =>
     type is InterfaceType && type.allSupertypes.any(_isWidget);
@@ -17,7 +16,7 @@ bool _isSubclassOfController(DartType? type) =>
     type is InterfaceType && type.allSupertypes.any(_isController);
 
 bool _isController(DartType? type) =>
-    type?.getDisplayString(withNullability: false) == 'GetxController';
+    type?.getDisplayString() == 'GetxController';
 
 bool isServiceOrSubclass(DartType? type) =>
     _isService(type) || _isSubclassOfService(type);
@@ -25,8 +24,7 @@ bool isServiceOrSubclass(DartType? type) =>
 bool _isSubclassOfService(DartType? type) =>
     type is InterfaceType && type.allSupertypes.any(_isService);
 
-bool _isService(DartType? type) =>
-    type?.getDisplayString(withNullability: false) == 'GetxService';
+bool _isService(DartType? type) => type?.getDisplayString() == 'GetxService';
 
 bool isDisposableServiceOrSubclass(DartType? type) =>
     _isDisposableService(type) || _isSubclassOfDisposableService(type);
@@ -35,7 +33,7 @@ bool _isSubclassOfDisposableService(DartType? type) =>
     type is InterfaceType && type.allSupertypes.any(_isDisposableService);
 
 bool _isDisposableService(DartType? type) =>
-    type?.getDisplayString(withNullability: false) == 'DisposableGetxService';
+    type?.getDisplayString() == 'DisposableGetxService';
 
 bool isEquatableOrSubclass(DartType? type) =>
     _isEquatable(type) || _isSubclassOfEquatable(type);
@@ -43,13 +41,12 @@ bool isEquatableOrSubclass(DartType? type) =>
 bool _isSubclassOfEquatable(DartType? type) =>
     type is InterfaceType && type.allSupertypes.any(_isEquatable);
 
-bool _isEquatable(DartType? type) =>
-    type?.getDisplayString(withNullability: false) == 'Equatable';
+bool _isEquatable(DartType? type) => type?.getDisplayString() == 'Equatable';
 
 bool isEquatableMixin(DartType? type) =>
     // ignore: deprecated_member_use
     type?.element2 is MixinElement &&
-    type?.getDisplayString(withNullability: false) == 'EquatableMixin';
+    type?.getDisplayString() == 'EquatableMixin';
 
 bool isSubclassOfEquatableMixin(DartType? type) {
   // ignore: deprecated_member_use

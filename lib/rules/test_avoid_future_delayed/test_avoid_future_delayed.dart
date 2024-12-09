@@ -50,10 +50,10 @@ class TestAvoidFutureDelayed extends DartLintRule {
         node.visitChildren(functionInvocationVisitor);
 
         functionInvocationVisitor.methods.forEach((element) {
-          reporter.reportErrorForOffset(
-            _code,
-            element.offset,
-            element.length,
+          reporter.atOffset(
+            errorCode: _code,
+            offset: element.offset,
+            length: element.length,
           );
         });
       }

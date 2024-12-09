@@ -44,10 +44,11 @@ class TestDescriptionSingleWhenAction extends DartLintRule {
                 element.length - element.trimLeft().length == offset);
 
             if (actions.length > 1) {
-              reporter.reportErrorForOffset(
-                code,
-                descriptionNode.offset + description.indexOf(whenSection),
-                whenSection.trimRight().length,
+              reporter.atOffset(
+                errorCode: code,
+                offset:
+                    descriptionNode.offset + description.indexOf(whenSection),
+                length: whenSection.trimRight().length,
               );
             }
           }

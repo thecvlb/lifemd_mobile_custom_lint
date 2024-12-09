@@ -43,10 +43,10 @@ class TestDescriptionThenAvoidSome extends DartLintRule {
               .isNotEmpty;
 
           if (isSomeExist) {
-            reporter.reportErrorForOffset(
-              _code,
-              descriptionNode.offset + thenSectionOffset,
-              description.length - thenSectionOffset + 1,
+            reporter.atOffset(
+              errorCode: _code,
+              offset: descriptionNode.offset + thenSectionOffset,
+              length: description.length - thenSectionOffset + 1,
             );
           }
         }
