@@ -8,9 +8,9 @@ dependencies:
   # we will use an analyzer for inspecting Dart files
   analyzer: ^6.8.0
   analyzer_plugin: ^0.11.3
-#  collection: ^1.19.0
   custom_lint_builder: ^0.6.6
-  custom_lint_core: ^0.6.5
+  # TODO: migrate to latest version
+  custom_lint_core: 0.6.5
   meta: ^1.12.0
   quiver: ^3.2.1
 
