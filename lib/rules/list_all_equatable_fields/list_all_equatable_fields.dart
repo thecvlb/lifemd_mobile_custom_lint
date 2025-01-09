@@ -83,8 +83,7 @@ class ListAllEquatableFields extends DartLintRule {
   }
 
   Set<String> _getParentFields(DartType? classType) {
-    // ignore: deprecated_member_use
-    final element = classType?.element2;
+    final element = classType?.element;
     if (element is! ClassElement) {
       return {};
     }

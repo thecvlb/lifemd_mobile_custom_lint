@@ -44,13 +44,11 @@ bool _isSubclassOfEquatable(DartType? type) =>
 bool _isEquatable(DartType? type) => type?.getDisplayString() == 'Equatable';
 
 bool isEquatableMixin(DartType? type) =>
-    // ignore: deprecated_member_use
-    type?.element2 is MixinElement &&
+    type?.element is MixinElement &&
     type?.getDisplayString() == 'EquatableMixin';
 
 bool isSubclassOfEquatableMixin(DartType? type) {
-  // ignore: deprecated_member_use
-  final element = type?.element2;
+  final element = type?.element;
 
   return element is ClassElement && element.mixins.any(isEquatableMixin);
 }
